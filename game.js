@@ -140,6 +140,19 @@ window.onload = function() {
         }
       }).bind("keyup", function(e) {
         this.stop();
+      }).collision()
+      .onhit("wall_left", function() {
+        this.x += this._speed;
+        this.stop();
+      }).onhit("wall_right", function() {
+        this.x -= this._speed;
+        this.stop();
+      }).onhit("wall_bottom", function() {
+        this.y -= this._speed;
+        this.stop();
+      }).onhit("wall_top", function() {
+        this.y += this._speed;
+        this.stop();
       });
   });
 
