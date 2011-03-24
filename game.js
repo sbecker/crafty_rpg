@@ -116,10 +116,31 @@ window.onload = function() {
     // Create our player entity with some premade components
     var player = Crafty.e("2D, DOM, player, controls, CustomControls, animate, collision")
       .attr({x: 160, y: 144, z: 1})
+      .CustomControls(1)
       .animate("walk_left", 6, 3, 8)
       .animate("walk_right", 9, 3, 11)
       .animate("walk_up", 3, 3, 5)
-      .animate("walk_down", 0, 3, 2);
+      .animate("walk_down", 0, 3, 2)
+      .bind("enterframe", function(e) {
+        if (this.__move.left) {
+          if (!this.isPlaying("walk_left"))
+            this.stop().animate("walk_left", 10);
+        }
+        if (this.__move.right) {
+          if (!this.isPlaying("walk_right"))
+            this.stop().animate("walk_right", 10);
+        }
+        if (this.__move.up) {
+          if (!this.isPlaying("walk_up"))
+            this.stop().animate("walk_up", 10);
+        }
+        if (this.__move.down) {
+          if (!this.isPlaying("walk_down"))
+            this.stop().animate("walk_down", 10);
+        }
+      }).bind("keyup", function(e) {
+        this.stop();
+      });
   });
 
   // Automatically play the loading scene
