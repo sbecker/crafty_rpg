@@ -70,6 +70,18 @@ window.onload = function() {
       .css({"text-align": "center"});
   });
 
+  Crafty.scene("main", function() {
+    generateWorld();
+
+    // Create our player entity with some premade components
+    var player = Crafty.e("2D, DOM, player, controls, animate, collision")
+      .attr({x: 160, y: 144, z: 1})
+      .animate("walk_left", 6, 3, 8)
+      .animate("walk_right", 9, 3, 11)
+      .animate("walk_up", 3, 3, 5)
+      .animate("walk_down", 0, 3, 2);
+  });
+
   // Automatically play the loading scene
   Crafty.scene("loading");
 
